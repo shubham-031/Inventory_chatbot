@@ -320,7 +320,7 @@ analytics_tools = [
 
 # Initialize LLM with tools
 analytics_llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash-exp",
+    model="gemini-2.5-flash",
     temperature=0.1,
 ).bind_tools(analytics_tools)
 
@@ -396,7 +396,7 @@ def analytics_formatter_node(state) -> Dict:
     )
 
     analytics_formatter_llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash-exp",
+        model="gemini-2.5-flash",
         temperature=0.2,
     )
 

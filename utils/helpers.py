@@ -9,7 +9,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from db.mongo_executor import MongoExecutor
 
 # Initialize Gemini model
-model = GoogleGenerativeAI(model="gemini-2.0-flash-exp", temperature=0.2)
+model = GoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.2)
 
 
 def executor_node(state) -> Dict:

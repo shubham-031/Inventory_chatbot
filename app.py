@@ -6,6 +6,10 @@ import streamlit as st
 from datetime import datetime
 import sys
 import os
+from dotenv import load_dotenv
+
+load_dotenv() 
+
 
 # Setup paths
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -528,7 +532,7 @@ if not st.session_state.owner_id:
             <ul>
                 <li>Top selling items</li>
                 <li>Bill tracking</li>
-                <li>Supplier management</li>
+                <li>Supplier management</li>  
                 <li>Custom analytics</li>
             </ul>
         </div>

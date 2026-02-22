@@ -1,3 +1,8 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from langgraph.prebuilt import ToolNode
@@ -5,9 +10,12 @@ from models.state_models import InventoryState
 from .analytics_tools import analytics_tools
 from typing import Dict
 
+
+# ✅ SAFE WORKING MODEL + API KEY
 analytics_llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
     temperature=0.1,
+    api_key=os.getenv("GEMINI_API_KEY")
 ).bind_tools(analytics_tools)
 
 tool_node = ToolNode(analytics_tools)
@@ -15,7 +23,7 @@ tool_node = ToolNode(analytics_tools)
 
 def analytics_llm_node(state: InventoryState) -> Dict:
     """Node that lets Gemini decide which analytics tool to call"""
-    
+
     user_query = state["user_query"]
     owner_id = state["owner_id"]
 
@@ -36,7 +44,7 @@ def analytics_llm_node(state: InventoryState) -> Dict:
 
 def analytics_formatter_node(state: InventoryState) -> Dict:
     """Format the analytics result into natural language"""
-    
+
     user_query = state["user_query"]
     messages = state["messages"]
 
@@ -49,9 +57,11 @@ def analytics_formatter_node(state: InventoryState) -> Dict:
     if tool_output_text is None:
         tool_output_text = "{}"
 
+    # ✅ Correct model here too
     analytics_formatter_llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         temperature=0.2,
+        api_key=os.getenv("GEMINI_API_KEY")
     )
 
     system_prompt = (
