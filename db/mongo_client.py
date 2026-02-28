@@ -19,7 +19,7 @@ class MongoDBClient:
             try:
                 self.client = MongoClient(self.uri)
                 # Get database name from URI or use default
-                db_name = "inventory"  # Change this to match your database
+                db_name = "inventry"  # Change this to match your database
                 self.db = self.client[db_name]
                 print(f"✅ Connected to MongoDB database: {db_name}")
                 return self.db
